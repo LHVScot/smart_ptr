@@ -78,9 +78,6 @@ public:
 
     ~Matrix() {} 
 
-
-    // 2. Доступ к элементам
-
     // Получение элемента по индексу 
     double GetElement(int row, int col) const {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
@@ -88,7 +85,6 @@ public:
         }
         return data[getIndex(row, col)];
     }
-
     // Установка элемента по индексу 
     void SetElement(int row, int col, double value) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
@@ -96,7 +92,6 @@ public:
         }
         data[getIndex(row, col)] = value;
     }
-
     // Оператор () 
     double& operator()(int row, int col) {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
@@ -104,15 +99,12 @@ public:
         }
         return data[getIndex(row, col)];
     }
-
     const double& operator()(int row, int col) const {
         if (row < 0 || row >= rows || col < 0 || col >= cols) {
             throw out_of_range("Index out of range.");
         }
         return data[getIndex(row, col)];
     }
-
-
 
     // Заполнение матрицы одним значением
     void Fill(double value) {
@@ -122,7 +114,6 @@ public:
             }
         }
     }
-
     // Заполнение матрицы случайными числами 
     void FillRandom() {
         random_device rd;
@@ -136,14 +127,11 @@ public:
         }
     }
 
-    // 4. Операции с матрицами
-
    // Сложение матриц
     Matrix operator+(const Matrix& other) const {
         if (rows != other.rows || cols != other.cols) {
             throw invalid_argument("Matrices must have the same dimensions for addition.");
         }
-
         Matrix result(rows, cols);
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
@@ -152,13 +140,11 @@ public:
         }
         return result;
     }
-
     // Вычитание матриц 
     Matrix operator-(const Matrix& other) const {
         if (rows != other.rows || cols != other.cols) {
             throw invalid_argument("Matrices must have the same dimensions for subtraction.");
         }
-
         Matrix result(rows, cols);
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
@@ -167,7 +153,6 @@ public:
         }
         return result;
     }
-
     // Умножение на число
     Matrix operator*(double scalar) const {
         Matrix result(rows, cols);
@@ -183,7 +168,6 @@ public:
         if (cols != other.rows) {
             throw invalid_argument("Number of columns in the first matrix must be equal to the number of rows in the second matrix for multiplication.");
         }
-
         Matrix result(rows, other.cols);
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < other.cols; ++j) {
@@ -194,7 +178,6 @@ public:
         }
         return result;
     }
-
     // Транспонирование
     Matrix Transpose() const {
         Matrix result(cols, rows);
@@ -205,7 +188,6 @@ public:
         }
         return result;
     }
-
     // Создание диагональной матрицы 
     static Matrix CreateDiagonal(const vector<double>& diagonal) {
         int size = diagonal.size();
@@ -215,8 +197,6 @@ public:
         }
         return result;
     }
-
-
     // Вычисление определителя 
     double Determinant() const {
         if (rows != cols) {
@@ -228,13 +208,8 @@ public:
         }
         throw runtime_error("Determinant calculation is not implemented for matrices larger than 2x2.");
     }
-
-
     int GetRows() const { return rows; }
-
     int GetCols() const { return cols; }
-
-
     // Оператор вывода 
     friend ostream& operator<<(ostream& os, const Matrix& matrix) {
         for (int i = 0; i < matrix.GetRows(); ++i) {
@@ -300,7 +275,6 @@ int main() {
         Matrix matrixMoved = move(matrixMove); 
 
         cout << "Matrix After Move:\n" << matrixMoved << endl;
-
 
     }
     catch (const exception& e) {
